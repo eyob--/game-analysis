@@ -7,14 +7,14 @@ public abstract class Game {
 
 	public abstract int boardHeight();
 
-	public abstract boolean won(boolean[][] board, boolean player);
+	public abstract boolean won(int[][] board, int player);
 
-	public abstract Move[] legalMoves(boolean[][] board, boolean player);
+	public abstract Move[] legalMoves(int[][] board, int player);
 
-	public abstract boolean[][] makeMove(boolean[][] board, boolean player, Move legalMove);
+	public abstract boolean[][] makeMove(int[][] board, int player, Move legalMove);
 
-	public boolean finished(boolean[][] board, boolean currentPlayer) {
-		return won(board, true) || won(board, false) || legalMoves(board, currentPlayer).length == 0;
+	public boolean finished(int[][] board, int currentPlayer) {
+		return won(board, 1) || won(board, 2) || legalMoves(board, currentPlayer).length == 0;
 	}
 
 	/**
