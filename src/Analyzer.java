@@ -17,7 +17,7 @@ public class Analyzer {
 	 */
 	public boolean canWin(int[][] board, int winner, int currentPlayer) {
 		if (game.won(board, winner)) return true;
-		if (game.finished(board, currentPlayer)) return true;
+		if (game.finished(board, currentPlayer)) return false;
 
 		Game.Move[] moves = game.legalMoves(board, currentPlayer);
 		int[][] newBoard;
