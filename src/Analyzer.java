@@ -1,7 +1,13 @@
 /**
  * 2-player identical piece game analyzer
  */
-public class Analyzer<G extends Game> {
+public class Analyzer {
+
+	private Game game;
+
+	public Analyzer(Game g) {
+		game = g;
+	}
 
 	/**
 	 * Returns whether or not a given player is guaranteed a win if they play perfectly
