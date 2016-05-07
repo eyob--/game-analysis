@@ -83,7 +83,7 @@ public class TicTacToe extends Game {
 			}
 		}
 		for (int i = 0; i < BOARD_LENGTH; i++) {
-			if (board[i][BOARD_LENGTH - i] != player) {
+			if (board[i][BOARD_LENGTH - i - 1] != player) {
 				second = false;
 				break;
 			}

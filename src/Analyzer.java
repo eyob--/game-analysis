@@ -25,14 +25,14 @@ public class Analyzer {
 		if (currentPlayer == winner) {
 			for (int i = 0; i < moves.length; i++) {
 				newBoard = game.makeMove(board, currentPlayer, moves[i]);
-				if (canWin(board, winner, 3 - currentPlayer)) return true;
+				if (canWin(newBoard, winner, 3 - currentPlayer)) return true;
 			}
 			return false;
 		}
 		else {
 			for (int i = 0; i < moves.length; i++) {
 				newBoard = game.makeMove(board, currentPlayer, moves[i]);
-				if (!canWin(board, winner, 3 - currentPlayer)) return false;
+				if (!canWin(newBoard, winner, 3 - currentPlayer)) return false;
 			}
 			return true;
 		}
