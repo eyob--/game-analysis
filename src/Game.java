@@ -11,7 +11,7 @@ public abstract class Game {
 
 	public abstract Move[] legalMoves(int[][] board, int player);
 
-	public abstract boolean[][] makeMove(int[][] board, int player, Move legalMove);
+	public abstract int[][] makeMove(int[][] board, int player, Move legalMove);
 
 	public boolean finished(int[][] board, int currentPlayer) {
 		return won(board, 1) || won(board, 2) || legalMoves(board, currentPlayer).length == 0;

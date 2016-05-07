@@ -20,7 +20,7 @@ public class Analyzer {
 		if (game.finished(board, currentPlayer)) return true;
 
 		Game.Move[] moves = game.legalMoves(board, currentPlayer);
-		boolean[][] newBoard;
+		int[][] newBoard;
 
 		if (currentPlayer == winner) {
 			for (int i = 0; i < moves.length; i++) {
