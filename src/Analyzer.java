@@ -9,10 +9,6 @@ public class Analyzer {
 		game = g;
 	}
 
-	public Game getGame() {
-		return game;
-	}
-
 	/**
 	 * Returns whether or not a given player is guaranteed a win if they play perfectly
 	 * @param board current state of the board
@@ -42,6 +38,13 @@ public class Analyzer {
 		}
 	}
 
+	/**
+	 * Prints all the subsequent states in which the game has been won by <code>winner</code>.
+	 * In these states, it is the <code>winner</code>'s turn
+	 * @param board current state of the board
+	 * @param winner the player who wins the game in the printed states
+	 * @param currentPlayer the player whose turn it is
+	 */
 	public void printAllWins(int[][] board, int winner, int currentPlayer) {
 		if (canWin(board, winner, currentPlayer)) {
 			printBoard(board, game);
@@ -57,6 +60,12 @@ public class Analyzer {
 		}
 	}
 
+	/**
+	 * Prints out the game board with hyphens where there are no players and standard p1 and p2 characters
+	 * for the other player's locations
+	 * @param board
+	 * @param game game that is being played
+	 */
 	public static void printBoard(int[][] board, Game game) {
 		char outputChar = '-';
 		for (int row = 0; row < game.boardHeight(); row++) {
