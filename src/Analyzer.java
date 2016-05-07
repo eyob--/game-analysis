@@ -16,7 +16,26 @@ public class Analyzer {
 	 * @param currentPlayer the player who's turn it is at the moment
 	 */
 	public boolean canWin(boolean[][] board, boolean winner, boolean currentPlayer) {
-		return false;
+		if (game.won(board, winner)) return true;
+		if (game.finished(board, currentPlayer)) return true;
+
+		Game.Move[] moves = game.legalMoves(board, currentPlayer);
+		boolean[][] newBoard;
+
+		if (currentPlayer == winner) {
+			for (int i = 0; i < moves.length; i++) {
+				newBoard = game.makeMove(board, currentPlayer, moves[i]);
+				if (canWin(board, winner, !currentPlayer)) return true;
+			}
+			return false;
+		}
+		else {
+			for (int i = 0; i < moves.length; i++) {
+				newBoard = game.makeMove(board, currentPlayer, moves[i]);
+				if (!canWin(board, winner, !currentPlayer)) return false;
+			}
+			return true;
+		}
 	}
 
 }

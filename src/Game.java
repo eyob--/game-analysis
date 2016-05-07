@@ -11,6 +11,8 @@ public abstract class Game {
 
 	public abstract Move[] legalMoves(boolean[][] board, boolean player);
 
+	public abstract boolean[][] makeMove(boolean[][] board, boolean player, Move legalMove);
+
 	public boolean finished(boolean[][] board, boolean currentPlayer) {
 		return won(board, true) || won(board, false) || legalMoves(board, currentPlayer).length == 0;
 	}
@@ -18,7 +20,7 @@ public abstract class Game {
 	/**
 	 * Representation of a "move", presumably putting a piece down at a certain location
 	 */
-	class Move {
+	public static class Move {
 
 		private int x, y;
 
