@@ -16,6 +16,18 @@ public abstract class Game {
 	public abstract int boardHeight();
 
 	/**
+	 * Get the character that represents player 1. don't use hyphen ('-')
+	 * @return the character that represents player 1
+	 */
+	public abstract char p1Char();
+
+	/**
+	 * Get the character that represents player 2. don't use hyphen ('-')
+	 * @return the character that represents player 2
+	 */
+	public abstract char p2Char();
+
+	/**
 	 * Check if a player has actually won at a given state of the game
 	 * @param board board at the given state of the game
 	 * @param player player to be checked

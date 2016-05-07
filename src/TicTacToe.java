@@ -22,6 +22,16 @@ public class TicTacToe extends Game {
 	}
 
 	@Override
+	public char p1Char() {
+		return 'X';
+	}
+
+	@Override
+	public char p2Char() {
+		return 'O';
+	}
+
+	@Override
 	public boolean won(int[][] board, int player) {
 		return wonInRows(board, player) || wonInColumns(board, player) || wonOnDiagonals(board, player);
 	}

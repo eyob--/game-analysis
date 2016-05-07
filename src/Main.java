@@ -6,6 +6,7 @@ public class Main {
 		board[1][1] = 1;
 		board[0][0] = 2;
 		System.out.println(a.canWin(board, 1, 1));
+		a.printAllWins(board, 1, 1);
 	}
 
 }

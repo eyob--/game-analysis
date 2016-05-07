@@ -9,6 +9,10 @@ public class Analyzer {
 		game = g;
 	}
 
+	public Game getGame() {
+		return game;
+	}
+
 	/**
 	 * Returns whether or not a given player is guaranteed a win if they play perfectly
 	 * @param board current state of the board
@@ -36,6 +40,43 @@ public class Analyzer {
 			}
 			return true;
 		}
+	}
+
+	public void printAllWins(int[][] board, int winner, int currentPlayer) {
+		if (canWin(board, winner, currentPlayer)) {
+			printBoard(board, game);
+			return;
+		}
+		if (game.finished(board, currentPlayer)) return;
+
+		Game.Move[] moves = game.legalMoves(board, currentPlayer);
+		int[][] newBoard;
+		for (Game.Move move : moves) {
+			newBoard = game.makeMove(board, currentPlayer, move);
+			printAllWins(newBoard, winner, 3 - currentPlayer);
+		}
+	}
+
+	public static void printBoard(int[][] board, Game game) {
+		char outputChar = '-';
+		for (int row = 0; row < game.boardHeight(); row++) {
+			for (int col = 0; col < game.boardWidth(); col++) {
+				switch (board[row][col]) {
+					case 0:
+						outputChar = '-';
+						break;
+					case 1:
+						outputChar = game.p1Char();
+						break;
+					case 2:
+						outputChar = game.p2Char();
+						break;
+				}
+				System.out.print(outputChar + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 
 }
