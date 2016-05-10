@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  * 2-player identical piece game analyzer
  */
@@ -46,10 +48,17 @@ public class Analyzer {
 	 * @param currentPlayer the player whose turn it is
 	 */
 	public void printAllWins(int[][] board, int winner, int currentPlayer) {
-		if (canWin(board, winner, currentPlayer) && !winNextTurn(board, currentPlayer)) {
+		printAllWins(board, winner, currentPlayer, new LinkedList<>());
+	}
+
+	private void printAllWins(int[][] board, int winner, int currentPlayer, LinkedList<State> boardsPrinted) {
+		if (canWin(board, winner, currentPlayer) && !winNextTurn(board, currentPlayer)
+				&& !boardsPrinted.contains(new State(board, currentPlayer))
+				&& currentPlayer == winner) {
 			char player = currentPlayer == 1 ? game.p1Char() : game.p2Char();
 			System.out.println(String.format("%c's turn", player));
 			printBoard(board, game);
+			boardsPrinted.add(new State(board, currentPlayer));
 			return;
 		}
 		if (game.finished(board, currentPlayer)) return;
@@ -58,7 +67,7 @@ public class Analyzer {
 		int[][] newBoard;
 		for (Game.Move move : moves) {
 			newBoard = game.makeMove(board, currentPlayer, move);
-			printAllWins(newBoard, winner, 3 - currentPlayer);
+			printAllWins(newBoard, winner, 3 - currentPlayer, boardsPrinted);
 		}
 	}
 
@@ -103,6 +112,32 @@ public class Analyzer {
 			System.out.println();
 		}
 		System.out.println();
+	}
+
+	class State {
+		private int[][] board;
+		private int currentPlayer;
+
+		public State(int[][] board, int currentPlayer) {
+			this.board = board;
+			this.currentPlayer = currentPlayer;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (o instanceof State) {
+				State s = (State) o;
+				if (board.length != s.board.length) return false;
+				for (int i = 0; i < board.length; i++) {
+					if (board[i].length != s.board[i].length) return false;
+					for (int j = 0; j < board[i].length; j++) {
+						if (board[i][j] != s.board[i][j]) return false;
+					}
+				}
+				return currentPlayer == s.currentPlayer;
+			}
+			return super.equals(o);
+		}
 	}
 
 }
