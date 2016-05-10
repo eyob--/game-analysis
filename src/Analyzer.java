@@ -46,7 +46,9 @@ public class Analyzer {
 	 * @param currentPlayer the player whose turn it is
 	 */
 	public void printAllWins(int[][] board, int winner, int currentPlayer) {
-		if (canWin(board, winner, currentPlayer)) {
+		if (canWin(board, winner, currentPlayer) && !winNextTurn(board, currentPlayer)) {
+			char player = currentPlayer == 1 ? game.p1Char() : game.p2Char();
+			System.out.println(String.format("%c's turn", player));
 			printBoard(board, game);
 			return;
 		}
@@ -58,6 +60,21 @@ public class Analyzer {
 			newBoard = game.makeMove(board, currentPlayer, move);
 			printAllWins(newBoard, winner, 3 - currentPlayer);
 		}
+	}
+
+	/**
+	 * Sees whether the game will be won this turn by the current player.
+	 * @param board current state of the board
+	 * @param currentPlayer player who's turn it is
+	 * @return whether currentPlayer can make a game-winning move this turn
+	 */
+	public boolean winNextTurn(int[][] board, int currentPlayer) {
+		int[][] newBoard;
+		for (Game.Move move : game.legalMoves(board, currentPlayer)) {
+			newBoard = game.makeMove(board, currentPlayer, move);
+			if (game.won(newBoard, currentPlayer)) return true;
+		}
+		return false;
 	}
 
 	/**
